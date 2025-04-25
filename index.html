@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="AutoEval: Autonomous Evaluation of Generalist Robot Manipulation Policies in the Real World">
+    <meta name="keywords" content="Robot Evaluation, Manipulation Policies, Autonomous Evaluation">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoEval</title>
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Google Sans', 'Noto Sans', 'Castoro', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        .hero {
+            padding: 0.5rem 1.5rem;
+        }
+        
+        .hero-body {
+            padding: 1rem 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .columns {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .column {
+            flex: 1;
+            padding: 0.75rem;
+        }
+        
+        .has-text-centered {
+            text-align: center;
+        }
+        
+        .title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            line-height: 1.125;
+            margin-bottom: 1.5rem;
+        }
+        
+        .grad_text {
+            background: linear-gradient(to left, rgb(37, 99, 235), rgba(30, 64, 175, 0.9));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+        
+        .publication-title {
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .publication-authors {
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .author-block {
+            display: inline-block;
+            margin-right: 0.25rem;
+        }
+        
+        .author-block a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+        
+        .author-block a:hover {
+            color: #1e40af;
+            text-decoration: underline;
+        }
+        
+        .publication-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .link-block {
+            display: inline-block;
+            margin: 0 0.25rem;
+        }
+        
+        .button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background-color: #363636;
+            color: white;
+            border: none;
+            border-radius: 290486px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .button:hover {
+            background-color: #292929;
+        }
+        
+        .button .icon {
+            margin-right: 0.5rem;
+        }
+        
+        .is-dark {
+            background-color: #363636;
+        }
+        
+        .is-primary {
+            background-color: #2563eb;
+        }
+        
+        .is-primary:hover {
+            background-color: #1e40af;
+        }
+        
+        .is-rounded {
+            border-radius: 290486px;
+        }
+
+        /* Section styling with alternating backgrounds */
+        .section {
+            padding: 2.5rem 2rem;
+        }
+        
+        /* Reduce space between hero and first section */
+        .hero + .section.section-light {
+            padding-top: 0rem;
+        }
+        
+        .section-light {
+            background-color: #ffffff;
+        }
+        
+        .section-dark {
+            background-color: #f5f7fa;
+        }
+        
+        .section-content {
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.6;
+            text-align: left;
+        }
+        
+        .section h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            text-align: center;
+        }
+        
+        .section p {
+            margin: 0 0 20px 0;
+            color: #374151;
+            font-size: 1.1em;
+        }
+        
+        /* Task images */
+        .task-images-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .task-image {
+            max-width: 45%;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Teaser image */
+        .teaser-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow-x: auto; /* Enable horizontal scrolling */
+        }
+
+        .teaser-image {
+            width: auto; /* Allow image to maintain its natural width */
+            max-width: 100%; /* Ensure it doesn't exceed container width on larger screens */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 8px;
+            display: block; /* Remove any extra spacing */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            .teaser-container {
+                overflow-x: visible; /* No need for horizontal scrolling if image fits */
+                max-width: 100%;
+            }
+            
+            .teaser-image {
+                width: 100%; /* Make image fit the width of the container */
+                height: auto; /* Maintain aspect ratio */
+                max-width: 100%;
+            }
+        }
+        
+        /* Links */
+        .section a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .section a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Lists */
+        .section ol, .section ul {
+            text-align: left;
+            padding-left: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section li {
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .code-block {
+            background-color: #f8f8f8;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border-left: 4px solid #2563eb;
+        }
+        .code-block code {
+            display: block;
+            background-color: #fff;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .code-block p {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns">
+        <div class="column has-text-centered">
+          <h1 class="title publication-title"><span class="grad_text">AUTOEVAL</span>: AUTONOMOUS EVALUATION OF GENERALIST ROBOT MANIPULATION POLICIES IN THE REAL WORLD</h1>
+
+          <div class="publication-links">
+            <!-- Dashboard Link. -->
+            <span class="link-block">
+              <a href="http://159.223.171.199:61299/submission"
+                 class="button is-rounded is-primary">
+                <span class="icon">
+                  <i class="fas fa-tachometer-alt"></i>
+                </span>
+                <span>Eval Live Stream & Queue</span>
+              </a>
+            </span>
+            <!-- Code Link. -->
+            <!-- <span class="link-block">
+              <a href=""
+                 class="button is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <section class="section section-light">
+        <div class="section-content">
+            <h2>Overview</h2>
+            <p>AutoEval is a system that autonomously evaluates generalist robot policies in the real world 24/7, and the evaluation results correspond closely to the ground truth human-run evaluations.
+                AutoEval requires minimal human intervention by using robust success classifiers and reset policies fine-tuned from foundation models.
+                We currently open access to two AutoEval stations with WidowX robots and four different tasks. 
+                Users can submit policies through an <a href="http://159.223.171.199:61299/submission" style="color: #2563eb">online dashboard</a>, and get back detailed evaluation report (success rates, videos, etc.) after the evaluation job is done. See a detailed video below for more details.
+            <div class="teaser-container">
+                <img src="assets/teaser.png" alt="AutoEval Teaser" class="teaser-image">
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-dark">
+        <div class="section-content">
+            <h2>Tasks</h2>
+            <div class="task-images-container">
+                <img src="assets/drawer_scene.png" alt="Drawer Scene" class="task-image">
+                <img src="assets/sink_scene.png" alt="Sink Scene" class="task-image">
+            </div>
+            <p>The currently publically available tasks are:</p>
+            <ul>
+                <li>Close the drawer</li>
+                <li>Open the drawer</li>
+                <li>Put the eggplant in the yellow basket</li>
+                <li>Put the eggplant in the blue sink</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section section-light">
+        <div class="section-content">
+            <h2>Instructions for Evaluating Your Policy in our AutoEval Cells</h2>
+            <p>
+                Your policy should take as input a 256x256 RGB image, an 8-dimensional proprioceptive state of the robot (xyz, r_xyz, 0, gripper), where gripper is between 0 (fully closed) and 0.39 (fully open), and a language command in string.
+                Your policy output should be a 7-dimensional end-effector delta action for the WidowX robot. We use blocking control to execute the policy action.
+            </p>
+            <ol>
+                <li>Set up a policy server that can output actions once queried with an observation (256 x 256 RGB image), proprio states, and language command.
+                    Follow this <a href="https://gist.github.com/anon-public-auto-eval/dd508b0735f1c60a2fd809793b4a5205"
+                        target="_blank">template</a> and fill out the two TODOs to create your own policy server. Basically
+                    you need to implement the model loading logic & model.call() logic. This should take you 5-10 minutes.
+                    <ul>
+                        <li>If you would like to quickly try out AutoEval, you can use our pre-made <a href="https://gist.github.com/anon-public-auto-eval/dcadd38424d10034fe1bb211e5257552" target="_blank">policy server for OpenVLA</a> to submit a job right away.</li>
+                    </ul>
+                </li> 
+                <li>Keep your policy server up and running (e.g. in a tmux) with <code>python policy_server.py</code>. This will set up your policy server on your
+                    localhost.</li>
+                <li>Make sure your policy server's IP & Port are publically accessible. After Step 2, you can expose your
+                    localhost to a public server with <a href="https://ngrok.com" target="_blank">ngrok</a> or <a
+                        href="https://github.com/ekzhang/bore" target="_blank">bore</a>. Both can be installed in ~1 min (See quick installation for bore <a href="https://gist.github.com/anon-public-auto-eval/ce9ee6af219e9bd9e17ef643dd3d1430" target="_blank">here</a>);
+                    ngrok has limited calls for free users, while bore is open-source and completely free.
+                    <div class="code-block">
+                        <p>With ngrok:</p>
+                        <code>ngrok http 8000</code>
+                        <p>With bore.pub:</p>
+                        <code>bore local 8000 --to bore.pub</code>
+                    </div>
+                    Either of these commands should also be persistently run (e.g. in a tmux). Note: if you aren't able to resolve bore.pub's DNS (e.g. if <code>ping bore.pub</code> fails), you can use their actual IP:
+                    <div class="code-block">
+                        <code>bore local 8000 --to 159.223.171.199</code>
+                    </div>
+                </li>
+                <li>Go to the AutoEval Dashboard at the top of the page, and enter your publically accessible IP & port of the policy server,
+                    and choose your eval task and other options. Submit your job!</li>
+                <li>Monitor your job progress in the dashboard, and view it executing in real time under the live feed.</li>
+            </ol>
+            <p>Please refer to the FAQ section at the bottom of the page if you run into any issues.</p>
+        </div>
+    </section>
+
+    <section class="section section-dark">
+        <div class="section-content">
+            <h2>Evaluation Report</h2>
+            <p>The evaluation report includes various metrics and visualizations to help you understand your policy's performance. It is hosted publicly on weights and biases. Some important metrics include:</p>
+            <div class="report-image-container" style="text-align: center; margin: 20px 0;">
+                <img src="assets/report.png" alt="Evaluation Report Example" style="max-width: 40%; height: auto;" class="report-image">
+            </div>
+            <style>
+                @media (max-width: 768px) {
+                    .report-image {
+                        max-width: 100% !important;
+                    }
+                }
+            </style>
+            <ul>
+                <li>Success rate statistics:</li>
+                    <ul style="padding-left: 40px;">
+                        <li><span style="font-family: 'Courier New', Courier, monospace">overall_success_rate:</span> average success rate over the entire evaluation job</li>
+                        <li><span style="font-family: 'Courier New', Courier, monospace">recent_success_rate:</span> success rate over the most recent 20 episodes in the evaluation job.</li>
+                        <li><span style="font-family: 'Courier New', Courier, monospace">episode_success:</span> whether each episode succeeded (1) or failed (0).</li>
+                    </ul>
+                <li>Visualization of evaluation:</li>
+                    <ul style="padding-left: 40px;">
+                        <li><span style="font-family: 'Courier New', Courier, monospace">video:</span> low resolution video of the trajectory</li>
+                        <li><span style="font-family: 'Courier New', Courier, monospace">frames:</span> a film strip of the episode instead of a full video</li>
+                        <li><span style="font-family: 'Courier New', Courier, monospace">initial_and_final_frames:</span> periodic snapshots of the initial and final frames of an episode, visualized alongside success signal.</li>
+                    </ul>
+                <li>Other metrics</li>
+            </ul>
+            <p>NOTE: the report cannot be accessed on this site for anonimity. It will be enabled after the double-blind review.</p>
+        </div>
+    </section>
+
+    <section class="section section-light">
+        <div class="section-content">
+            <h2>FAQ</h2>
+            <ol>
+                <li><strong>Q: Does AutoEval support evaluation policies with action chunking and observation history?</strong><br>
+                A: Yes, but the policy server would need to keep track of the states (e.g. history, action chunks). We provide an example of such a policy server <a href="https://gist.github.com/anon-public-auto-eval/b67d459d79914d6e1a23d01313e5b793" target="_blank">here</a>.</li>
+                <br>
+                <li><strong>Q: Why did I get the "Exception: Failed to connect to action server" error?</strong><br>
+                    A: This error occurs because the AutoEval server cannot connect to the robot action server. Sometimes re-submitting the job to the same robot will fix the issue. If two consecutive jobs fail, the robot is likely down; please contact the authors with your job ID.</li>
+                <br>
+                <li><strong>Q: Will the Motors Overheat from continuous evals?</strong><br>
+                A: We put the robot to rest for 20 minutes every 6 hours. So if your job doesn't get queued when there is no jobs before it, it might be in the resting period.</li>
+                <br>
+                <li><strong>Q: Can I evaluate goal-conditioned policies?</strong><br>
+                A: Yes. Even though the AutoEval server will query your policy with the language command, your policy server can ignore the language command and use the proper goal image. We provide the goal images of the four tasks in the github repo.</li>
+            </ol>
+    </div>
+
+<section class="section section-dark">
+    <div class="section-content">
+        <h2>Video</h2>
+        <div style="text-align: center; margin: 20px auto; max-width: 800px;">
+            <video width="100%" controls>
+                <source src="assets/video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+</section>
+
+
+</body>
+
+</html>
